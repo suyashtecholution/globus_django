@@ -15,10 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from . import views
+from django.views.decorators.csrf import csrf_exempt
+
 from django.urls import path
 
 urlpatterns = [
     path('take_image',views.capture_image,name='take_image'),
     path('close_camera',views.stop_django_server,name='close_camera'),
     path('start_camera',views.start_camera,name='start_camera'),
+    path('inference_3_screw',views.inference_3_screw,name='inference_3_screw'),
+    path('temp',views.temp_crop,name='temp'),
+    path("manual_inference/from/<str:from>/to/<str:to>",views.manual_inference,name="manual_inference"),
+    path('request_visualizer',csrf_exempt(views.request_visualizer),name='request_visualizer'),
+    path('calib',views.calib,name='calib'),
 ]
